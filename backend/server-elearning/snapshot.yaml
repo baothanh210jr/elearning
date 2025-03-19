@@ -1,0 +1,329 @@
+collections:  
+  # Collection: Courses  
+  - collection: courses  
+    meta:  
+      accountability: all  
+      archive_app_filter: false  
+      archive_field: null  
+      archive_value: null  
+      collapse: open  
+      collection: courses  
+      color: null  
+      display_template: "{{title}}"  
+      group: null  
+      hidden: false  
+      icon: book  
+      item_duplication_fields: null  
+      note: Quản lý thông tin khóa học trên hệ thống elearning  
+      singleton: false  
+      sort: null  
+      sort_field: created_at  
+      translations: null  
+      unarchive_value: null  
+    schema:  
+      name: courses  
+      sql: >-  
+        CREATE TABLE "courses" (  
+          "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,  
+          "title" VARCHAR(255) NOT NULL,  
+          "description" TEXT NULL DEFAULT null,  
+          "category" TEXT NULL DEFAULT null,  
+          "instructor" CHAR(36) NULL DEFAULT null,  
+          "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,  
+          CONSTRAINT "courses_instructor_foreign" FOREIGN KEY ("instructor")  
+          REFERENCES "directus_users" ("id") ON DELETE SET NULL)  
+  # Collection: Lessons  
+  - collection: lessons  
+    meta:  
+      accountability: all  
+      archive_app_filter: false  
+      archive_field: null  
+      archive_value: null  
+      collapse: open  
+      collection: lessons  
+      color: null  
+      display_template: "{{title}}"  
+      group: null  
+      hidden: false  
+      icon: play_circle  
+      item_duplication_fields: null  
+      note: Danh sách bài giảng của khóa học  
+      singleton: false  
+      sort: null  
+      sort_field: created_at  
+      translations: null  
+      unarchive_value: null  
+    schema:  
+      name: lessons  
+      sql: >-  
+        CREATE TABLE "lessons" (  
+          "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,  
+          "course_id" INTEGER NOT NULL,  
+          "title" VARCHAR(255) NOT NULL,  
+          "content" TEXT NULL DEFAULT null,  
+          "video_url" TEXT NULL DEFAULT null,  
+          "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,  
+          CONSTRAINT "lessons_course_foreign" FOREIGN KEY ("course_id")  
+          REFERENCES "courses" ("id") ON DELETE CASCADE)  
+  # Collection: Quizzes  
+  - collection: quizzes  
+    meta:  
+      accountability: all  
+      archive_app_filter: false  
+      archive_field: null  
+      archive_value: null  
+      collapse: open  
+      collection: quizzes  
+      color: null  
+      display_template: "{{title}}"  
+      group: null  
+      hidden: false  
+      icon: check_circle  
+      item_duplication_fields: null  
+      note: Bài kiểm tra liên quan tới các khóa học  
+      singleton: false  
+      sort: null  
+      sort_field: created_at  
+      translations: null  
+      unarchive_value: null  
+    schema:  
+      name: quizzes  
+      sql: >-  
+        CREATE TABLE "quizzes" (  
+          "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,  
+          "course_id" INTEGER NOT NULL,  
+          "title" VARCHAR(255) NOT NULL,  
+          "content" TEXT NULL DEFAULT null,  
+          "video_url" TEXT NULL DEFAULT null,  
+          "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,  
+          CONSTRAINT "lessons_course_foreign" FOREIGN KEY ("course_id")  
+          REFERENCES "courses" ("id") ON DELETE CASCADE)  
+fields:  
+  # Fields for Courses  
+  - collection: courses  
+    field: id  
+    meta:  
+      collection: courses  
+      hidden: true  
+      interface: input  
+      readonly: true  
+      sort: 1  
+      special: null  
+      width: full  
+    schema:  
+      data_type: integer  
+      default_value: null  
+      has_auto_increment: true  
+      is_primary_key: true  
+      is_nullable: false  
+      is_unique: false  
+    type: integer  
+
+  - collection: courses  
+    field: title  
+    meta:  
+      collection: courses  
+      hidden: false  
+      interface: input  
+      required: true  
+      sort: 2  
+      special: null  
+      width: full  
+    schema:  
+      data_type: varchar  
+      default_value: null  
+      max_length: 255  
+      is_nullable: false  
+    type: string  
+
+  - collection: courses  
+    field: description  
+    meta:  
+      collection: courses  
+      hidden: false  
+      interface: textarea  
+      required: false  
+      sort: 3  
+      special: null  
+      width: full  
+    schema:  
+      data_type: text  
+      default_value: null  
+      is_nullable: true  
+    type: text  
+
+  - collection: courses  
+    field: category  
+    meta:  
+      collection: courses  
+      hidden: false  
+      interface: tags  
+      required: false  
+      sort: 4  
+      special: null  
+      width: full  
+    schema:  
+      data_type: text  
+      default_value: null  
+      is_nullable: true  
+    type: text  
+
+  - collection: courses  
+    field: instructor  
+    meta:  
+      collection: courses  
+      hidden: false  
+      interface: select-dropdown-m2o  
+      options:  
+        template: "{{first_name}} {{last_name}}"  
+        collection: directus_users  
+      required: false  
+      sort: 5  
+      special: []  
+      width: full  
+    schema:  
+      data_type: varchar  
+      default_value: null  
+      is_nullable: true  
+      max_length: 36  
+    type: uuid  
+
+  - collection: courses  
+    field: created_at  
+    meta:  
+      collection: courses  
+      hidden: true  
+      interface: datetime  
+      readonly: true  
+      required: false  
+      sort: 6  
+      special:  
+        - date-created  
+      width: full  
+    schema:  
+      data_type: timestamp  
+      default_value: CURRENT_TIMESTAMP  
+      is_nullable: true  
+    type: timestamp  
+
+  # Fields for Lessons  
+  - collection: lessons  
+    field: id  
+    meta:  
+      collection: lessons  
+      hidden: true  
+      interface: input  
+      readonly: true  
+      required: false  
+      sort: 1  
+      special: null  
+      width: full  
+    schema:  
+      data_type: integer  
+      has_auto_increment: true  
+      is_nullable: false  
+      is_primary_key: true  
+    type: integer  
+
+  - collection: lessons  
+    field: title  
+    meta:  
+      collection: lessons  
+      hidden: false  
+      interface: input  
+      required: true  
+      sort: 2  
+      special: null  
+      width: full  
+    schema:  
+      data_type: varchar  
+      max_length: 255  
+      is_nullable: false  
+    type: string  
+
+  - collection: lessons  
+    field: content  
+    meta:  
+      collection: lessons  
+      hidden: false  
+      interface: textarea  
+      required: false  
+      sort: 3  
+      special: null  
+      width: full  
+    schema:  
+      data_type: text  
+      is_nullable: true  
+    type: text  
+
+  - collection: lessons  
+    field: video_url  
+    meta:  
+      collection: lessons  
+      hidden: false  
+      interface: input  
+      required: false  
+      sort: 4  
+      special: null  
+      width: full  
+    schema:  
+      data_type: text  
+      is_nullable: true  
+    type: text  
+
+  - collection: lessons  
+    field: created_at  
+    meta:  
+      collection: lessons  
+      hidden: true  
+      interface: datetime  
+      readonly: true  
+      sort: 5  
+      special:  
+        - date-created  
+      width: full  
+    schema:  
+      data_type: timestamp  
+      default_value: CURRENT_TIMESTAMP  
+      is_nullable: true  
+    type: timestamp  
+
+  - collection: lessons  
+    field: course_id  
+    meta:  
+      collection: lessons  
+      hidden: false  
+      interface: select-dropdown-m2o  
+      options:  
+        collection: courses  
+        template: "{{title}}"  
+      required: true  
+      width: full  
+    schema:  
+      data_type: integer  
+      foreign_key_column: id  
+      foreign_key_table: courses  
+      max_length: null  
+      is_nullable: false  
+    type: integer  
+relations:  
+  - collection: lessons  
+    field: course_id  
+    related_collection: courses  
+    schema:  
+      table: lessons  
+      column: course_id  
+      foreign_key_table: courses  
+      foreign_key_column: id  
+      on_delete: CASCADE  
+      on_update: NO ACTION  
+  - collection: courses  
+    field: instructor  
+    related_collection: directus_users  
+    schema:  
+      table: courses  
+      column: instructor  
+      foreign_key_table: directus_users  
+      foreign_key_column: id  
+      on_delete: SET NULL  
+      on_update: NO ACTION  
