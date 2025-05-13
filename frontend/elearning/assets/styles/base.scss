@@ -1,13 +1,16 @@
+
 html {
-  font-size: 62.5%;
   overflow: auto;
 }
 body {
-  font-size: 1.4rem;
-  font-family: 'Noto Sans Korean', 'malgun gothic', 'HelveticaNeue-Light', 'AppleSDGothicNeo-Light',
-    'sans-serif';
-  color: #586682;
+  font-size: 16px;
+  color: black;
+  background-color: #f3f7ff;
   height: 100vh;
   overflow: auto !important;
-  padding-bottom: 3.2rem;
+  margin:0;
 }
+:root {
+  --header-height: 100px;
+}
+

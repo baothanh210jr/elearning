@@ -11,6 +11,7 @@
   "description": "",
   "dependencies": {
     "directus": "^11.5.1",
+    "directus-extension-currency-interface": "^1.1.1",
     "sqlite3": "^5.1.7"
   }
 }

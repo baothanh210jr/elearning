@@ -1,13 +1,16 @@
 import { defineStore } from 'pinia';
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 
 export const useAuthentication = defineStore('authentication', () => {
-  const isLogin = ref<Boolean>(false);
-  const setLogin = (value: Boolean) => {
+  const isLogin = ref<boolean>(false);
+  const token = ref<string | null>(null);
+  const setLogin = (value: boolean) => {
     isLogin.value = value;
   };
+
   return {
     isLogin,
-    setLogin
+    setLogin,
+    token
   };
 });

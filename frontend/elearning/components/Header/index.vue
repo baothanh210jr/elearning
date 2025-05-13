@@ -1,44 +1,69 @@
 <template>
-  <header class="bg-gray-900 text-white px-8 py-4 flex justify-between items-center">
+  <header
+    style="height: var(--header-height)"
+    class="text-black px-8 flex justify-between items-center fixed top-0 left-0 w-full z-50 "
+  >
     <!-- Logo and Navigation -->
-    <div class="flex items-center space-x-4">
+    <NuxtLink class="flex items-center space-x-4" to="/">
       <!-- Logo -->
       <div class="text-xl font-bold cursor-pointer b b-b-green-400 b-b-opacity-50 p-2">
-        <span class="text-green-400">Master</span> Developer
+        <span class="text-blue-500">Master</span> Developer
       </div>
       <!-- Navigation Links -->
-      <nav class="hidden md:flex space-x-6">
-        <a href="#" class="hover:text-green-400">Home</a>
-        <a href="#" class="hover:text-green-400">Courses</a>
-        <a href="#" class="hover:text-green-400">Contact</a>
-      </nav>
-    </div>
+    </NuxtLink>
+    <UInput
+      icon="i-lucide-search"
+      size="xl"
+      variant="outline"
+      placeholder="Search..."
+      class="w-full max-w-150"
+  />
 
     <!-- Action Buttons -->
-    <div v-if="!applicationStore.isLogin" class="flex items-center space-x-4">
+    <div v-if="!auth.isLogin" class="flex items-center space-x-4">
       <!-- Login -->
-      <button
-        class="bg-transparent hover:bg-green-500 text-white border border-green-500 text-sm font-medium px-4 py-2 rounded-md"
+      <UButton
+        @click="popupStore.activePopup = NAME_POPUP.LOGIN"
+        variant="outline"
+        class="px-6 cursor-pointer font-bold"
+        size="xl"
+        >Login</UButton
       >
-        Login
-      </button>
       <!-- Sign Up -->
-      <button
-        class="bg-green-500 hover:bg-green-400 text-white text-sm font-medium px-4 py-2 rounded-md"
+      <UButton
+        @click="popupStore.activePopup = NAME_POPUP.SIGNUP"
+        class="px-6 cursor-pointer text-white font-bold bg-secondary-500 hover:bg-secondary-600"
+        size="xl"
+        color="success"
+        >Sign Up</UButton
       >
-        Sign Up
-      </button>
     </div>
     <div v-else>
-      <button
-        class="bg-green-500 hover:bg-green-400 text-white text-sm font-medium px-4 py-2 rounded-md"
-      >
-        Logout
-      </button>
+      <div class="flex items-center gap-5">
+        <UAvatar :src="`${config.public.apiBase}/assets/${applicationStore.user?.avatar}`" />
+        <UButton
+          @click="handleLogout"
+          loading-auto
+          class="bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium px-8 py-3 rounded-md"
+        >
+          Logout
+        </UButton>
+      </div>
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
+import { NAME_POPUP } from '~/constants/CommonConstant';
+
+const config = useRuntimeConfig();
+
+const auth = useAuthentication();
 const applicationStore = useApplicationStore();
+const popupStore = usePopupStore();
+
+const handleLogout = async () => {
+  auth.token = '';
+  return await applicationStore.setLogout();
+};
 </script>

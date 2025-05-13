@@ -1,0 +1,9 @@
+export const EMAIL_INVALID = "Please enter a valid email address (e.g example@domain.com)";
+export const EMAIL_REQUIRED = "Your email field is required";
+export const EMAIL_EXISTED = "Email already exists";
+export const PASSWORD_REQUIRED = "Your password field is required";
+export const PASSWORD_INVALID = "Password must be at least 6 characters long";
+export const PASSWORD_NOT_MATCH = "Password does not match";
+export const REQUIRED_FIELD = "This field is required";
+export const LOGIN_FAILED = "Email or Password incorrect";
+export const SIGNUP_SUCCESS = "Sign up successfully. Click here to login";

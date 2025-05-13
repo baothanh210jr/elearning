@@ -1,0 +1,13 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme {
+  --container-8xl: 90rem;
+  --nui-bg-elevated: #ccc;
+  --nui-bg-default: #fff; /* Adding a new background color variable */
+}
+
+:root {
+  --ui-container: var(--container-8xl);
+  --ui-bg-elevated: var(--nui-bg-elevated);
+}
