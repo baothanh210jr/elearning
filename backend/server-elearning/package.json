@@ -1,17 +1,18 @@
 {
-  "name": "serer-elearning",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "directus": "^11.5.1",
-    "directus-extension-currency-interface": "^1.1.1",
-    "sqlite3": "^5.1.7"
-  }
+	"name": "serer-elearning",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"description": "",
+	"dependencies": {
+		"@directus-labs/spreadsheet-layout": "^1.0.2",
+		"directus": "^11.5.1",
+		"directus-extension-currency-interface": "^1.1.1",
+		"sqlite3": "^5.1.7"
+	}
 }

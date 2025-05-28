@@ -1,14 +1,12 @@
 <template>
     <main>
         <Header />
-        <div class="flex pl-75">
-            <SidebarDesktop class="border-primary border-r" />
-            <UContainer class="w-full py-10">
-                <div style="margin-top: var(--header-height)" class="min-h-screen w-full">
-                    <slot />
-                </div>
-            </UContainer>
-        </div>
+        <UContainer class="w-full py-10">
+            <div class="min-h-screen w-full">
+                <slot />
+            </div>
+        </UContainer>
+
         <UModal
             :open="popupStore.activePopup === NAME_POPUP.LOGIN"
             @update:open="popupStore.closePopup"
