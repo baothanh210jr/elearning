@@ -2,7 +2,7 @@ export const PAGE = {
     HOME: 'home',
     DASHBOARD: 'dashboard',
     PROGRESS: 'progress',
-    COURSE_DETAIL: 'course-detail',
+    COURSE_DETAIL: 'product-detail',
     CATEGORIES: 'categories-list',
 }
 

@@ -13,7 +13,6 @@ export default defineEventHandler(async (event) => {
         },
         body: JSON.stringify({
             ...body,
-            role: config.public.role
         })
     });
 

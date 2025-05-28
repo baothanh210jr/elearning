@@ -5,7 +5,7 @@
       class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 relative"
     >
       <div class="col-span-1" v-for="(item, index) in courses?.data" :key="index">
-        <CardCourse :course="item" :status />
+        <CardProduct :product="item"  />
       </div>
       <div class="absolute bottom-50 right-0 sentinel" ref="sentinel"></div>
       <div
@@ -14,7 +14,7 @@
         v-for="(item, index) in coursesPending"
         :key="index"
       >
-        <CardCourse :course="item" />
+        <!-- <CardCourse :course="item" /> -->
       </div>
     </div>
     <div v-else class="flex justify-center items-center h-screen">
@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { Course } from '@/types/course';
+import type { Product } from '@/types/product';
 import { PAGE } from '@/constants/CommonConstant';
 import { API_STATUS_SSR } from '@/constants/ApiConstant';
 
@@ -49,10 +49,10 @@ const coursesPending = computed(() => {
       (_, index) =>
         ({
           id: `pending-${index}`,
-          title: 'Loading Course...',
+          name: 'Loading Course...',
           description: 'Please wait',
           statusPending: true
-        }) as Course
+        }) as Product
     );
   } else {
     return [];
@@ -64,12 +64,13 @@ const {
   status,
   error,
   refresh
-} = useAsyncData<{ data: Course[]; totalCount: number }>('fetchCourses', () => fetchCourses(), {
+} = useAsyncData<{ data: Product[]; totalCount: number }>('fetchCourses', () => fetchCourses(), {
   watch: [() => applicationStore.user?.id, limit]
 });
 
-async function fetchCourses(): Promise<{ data: Course[]; totalCount: number }> {
-  const response = await $fetch<{ data: Course[]; totalCount: number }>(`/api/courses`, {
+async function fetchCourses(): Promise<{ data: Product[]; totalCount: number }> {
+  console.log('🚀 ~ index.vue:77 ~ fetchCourses ~ authStore:', authStore);
+  const response = await $fetch<{ data: Product[]; totalCount: number }>(`/api/products`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${authStore.token}`

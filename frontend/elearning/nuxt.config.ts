@@ -25,7 +25,6 @@ export default defineNuxtConfig({
     public: {
       apiBase: process.env.API_URL || 'http://localhost:8055',
       adminToken: process.env.ADMIN_ACCESS_TOKEN || '',
-      role: process.env.ROLE_STUDENT || ''
     }
   },
   hooks: {
@@ -38,8 +37,8 @@ export default defineNuxtConfig({
         },
         {
           name: PAGE.COURSE_DETAIL,
-          path: '/course/:slug/:id',
-          file: '@/pages/course-detail.vue',
+          path: '/hai-san/:slug/:id',
+          file: '@/pages/product-detail.vue',
         },
     )
     }

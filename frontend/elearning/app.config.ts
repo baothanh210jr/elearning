@@ -1,9 +1,5 @@
 export default defineAppConfig({
   ui: {
-    colors: {
-      primary: 'blue',
-      neutral: 'zinc'
-    },
     card: {
       slots: {
         root: 'rounded-[calc(var(--ui-radius)*2)]',

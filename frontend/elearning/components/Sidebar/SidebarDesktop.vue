@@ -1,17 +1,18 @@
 <template>
-  <aside class="sidebar ">
+  <aside class="sidebar">
     <nav>
       <!-- Menu chính -->
-      <ul class="menu-list">
-        <li v-for="(menu, index) in menus" :key="index">
+      <ul class="menu-list divide-y divide-black">
+        <li v-for="(menu, index) in categories?.data" :key="index">
           <NuxtLink
             :to="{
-              name: menu.link
+              name: PAGE.COURSE_DETAIL,
+              params: { slug: convertToSlug(menu.name), id: menu.id }
             }"
             class="flex items-center gap-3"
           >
-            <UIcon :name="menu.icon" class="size-5 text-black" />
-            <span>{{ menu.title }}</span>
+            <!-- <UIcon :name="menu.icon" class="size-5 text-black" /> -->
+            <span>{{ menu.name }}</span>
           </NuxtLink>
         </li>
       </ul>
@@ -21,28 +22,28 @@
 
 <script setup lang="ts">
 import { PAGE } from '@/constants/CommonConstant';
-const menus = ref([
-  {
-    icon: 'hugeicons:dashboard-circle',
-    title: 'Dashboard',
-    link: PAGE.DASHBOARD
-  },
-  {
-    icon: 'material-symbols:library-books-outline-sharp',
-    title: 'My Courses',
-    link: PAGE.PROGRESS
-  },
-  {
-    icon: 'material-symbols:list-alt-outline',
-    title: 'Categories',
-    link: PAGE.CATEGORIES
-  },
-  {
-    icon: 'carbon:ai-status-in-progress',
-    title: 'My Progress',
-    link: PAGE.PROGRESS
-  }
-]);
+import type { Category } from '@/types/category';
+
+
+
+const fetchCategories = async (): Promise<{ data: Category[]; totalCount: number }> => {
+  const response = await $fetch<{ data: Category[]; totalCount: number }>(`/api/categories`, {
+    method: 'GET',
+    query: {
+      meta: 'total_count'
+    }
+  });
+  return response;
+}
+
+const {
+  data: categories,
+  status,
+  error,
+  refresh
+} = useAsyncData<{ data: Category[]; totalCount: number }>('fetchCategories', () => fetchCategories());
+
+
 </script>
 
 <style scoped>
@@ -56,7 +57,6 @@ const menus = ref([
   color: #ffffff; /* Màu chữ trắng */
   display: flex;
   flex-direction: column;
-
   overflow-y: auto;
 }
 
@@ -78,12 +78,12 @@ const menus = ref([
 
 .menu-list {
   list-style: none;
-  padding: 10px;
   margin: 0;
+
 }
 
 .menu-list li {
-  margin-bottom: 1rem;
+
 }
 
 .menu-list li a {
@@ -91,7 +91,7 @@ const menus = ref([
   color: #646464; /* Màu xám chữ */
   font-size: 18px;
   font-weight: 500;
-  padding: 10px 15px 10px 20px; /* Fixed padding syntax */
+  padding: 15px 15px 15px 20px; /* Fixed padding syntax */
   border-radius: 0.5rem;
   transition: background-color 0.2s ease;
   a {
@@ -100,6 +100,5 @@ const menus = ref([
 }
 
 .menu-list li:hover {
-  background-color: #ebebeb; /* Tô sáng khi hover */
 }
 </style>

@@ -1,13 +1,13 @@
 <template>
   <header
     style="height: var(--header-height)"
-    class="text-black px-8 flex justify-between items-center fixed top-0 left-0 w-full z-50 "
+    class="text-black px-8 flex justify-between items-center fixed top-0 left-0 w-full z-50 bg-primary "
   >
     <!-- Logo and Navigation -->
     <NuxtLink class="flex items-center space-x-4" to="/">
       <!-- Logo -->
-      <div class="text-xl font-bold cursor-pointer b b-b-green-400 b-b-opacity-50 p-2">
-        <span class="text-blue-500">Master</span> Developer
+      <div class="text-xl font-bold cursor-pointer b b-b-green-400 b-b-opacity-50 p-2 text-white">
+        <span class="">Hải sản</span> Ngọc Duyên
       </div>
       <!-- Navigation Links -->
     </NuxtLink>
@@ -15,28 +15,26 @@
       icon="i-lucide-search"
       size="xl"
       variant="outline"
-      placeholder="Search..."
+      placeholder="Tìm kiếm..."
       class="w-full max-w-150"
   />
 
     <!-- Action Buttons -->
-    <div v-if="!auth.isLogin" class="flex items-center space-x-4">
+    <div v-if="!auth.isLogin" class="flex items-center ">
       <!-- Login -->
       <UButton
         @click="popupStore.activePopup = NAME_POPUP.LOGIN"
-        variant="outline"
-        class="px-6 cursor-pointer font-bold"
+        class="cursor-pointer font-bold"
         size="xl"
-        >Login</UButton
+        >Đăng nhập</UButton
       >
       <!-- Sign Up -->
-      <UButton
+      <!-- <UButton
         @click="popupStore.activePopup = NAME_POPUP.SIGNUP"
-        class="px-6 cursor-pointer text-white font-bold bg-secondary-500 hover:bg-secondary-600"
+        class=" cursor-pointer text-white font-bold  "
         size="xl"
-        color="success"
-        >Sign Up</UButton
-      >
+        >Đăng ký</UButton
+      > -->
     </div>
     <div v-else>
       <div class="flex items-center gap-5">
@@ -46,7 +44,7 @@
           loading-auto
           class="bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium px-8 py-3 rounded-md"
         >
-          Logout
+          Đăng xuất
         </UButton>
       </div>
     </div>

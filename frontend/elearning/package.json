@@ -7,7 +7,11 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint --ext \".ts,.vue\" --ignore-path .gitignore .",
+    "lint:prettier": "prettier --check .",
+    "prettier:fix": "prettier --write --list-different .",
+    "lint:fix": "eslint --ext \".ts,.vue\" --ignore-path .gitignore . --fix"
   },
   "dependencies": {
     "@nuxt/ui": "^3.0.0",

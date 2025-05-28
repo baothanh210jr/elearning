@@ -4,10 +4,31 @@
 @theme {
   --container-8xl: 90rem;
   --nui-bg-elevated: #ccc;
-  --nui-bg-default: #fff; /* Adding a new background color variable */
+  --nui-bg-default: #fff;
+  --color-primary:  #051b69;
+  --color-primary-50:  #8491c0;    /* nhạt hơn */
+  --color-primary-100: #152b79;
+  --color-primary-200: #254b89;
+  --color-primary-300: #356b99;
+  --color-primary-400: #457ba9;
+  --color-primary-500: #051b69;    /* màu chính */
+  --color-primary-600: #051b69;
+  --color-primary-700: #051b69;
+  --color-primary-800: #051b69;
+  --color-primary-900: #051b69;
+  --color-primary-950: #051b69;
+
+  --color-secondary: #6c47ff;
+  /* hoặc muốn giống primary thì: --color-secondary: #051b69; */
+  --color-secondary-50: #e8e3ff;
+  --color-secondary-100: #d1c7ff;
+  --color-secondary-500: #6c47ff;
+  /* ...tương tự các màu khác nếu dùng */
+  
 }
 
 :root {
+  --ui-primary: var(--color-primary);
   --ui-container: var(--container-8xl);
   --ui-bg-elevated: var(--nui-bg-elevated);
 }
