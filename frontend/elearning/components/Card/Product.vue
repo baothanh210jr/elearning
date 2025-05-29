@@ -2,7 +2,7 @@
     <UCard class="min-h-80 max-h-100 flex flex-col shadow-md hover:bg-white">
         <!-- Hình ảnh mô tả (thumbnail) -->
 
-        <USkeleton v-if="product.statusPending" class="h-40 w-full" />
+        <USkeleton v-if="product.statusPending" class="h-40 w-full my-5" />
         <nuxt-link
             v-else
             :to="{
