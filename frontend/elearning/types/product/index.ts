@@ -8,7 +8,7 @@ export interface Product {
     thumbnail?: string;
     created_at?: Date;
     statusPending?: boolean;
-    category_id: {
+    category: {
         id: string;
         name: string;
     };

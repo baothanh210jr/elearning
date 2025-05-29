@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
                 'Content-Type': 'application/json'
             },
             params: {
-                fields: '*, product.*'
+                fields: '*,products.*'
             }
         });
 

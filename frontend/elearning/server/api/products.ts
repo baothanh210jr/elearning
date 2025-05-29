@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
             query,
             params: {
                 // sort: '-created_at',
-                fields: '*,category_id,category_id.name'
+                fields: '*,category,category.name'
             }
         });
         return {

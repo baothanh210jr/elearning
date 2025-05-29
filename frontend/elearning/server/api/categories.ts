@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
             query,
             params: {
                 sort: 'sort',
-                fields: '*, product.*'
+                fields: '*, products.*'
             }
         });
         return {

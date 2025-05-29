@@ -9,7 +9,7 @@
                 name: 'product-detail',
                 params: {
                     id: product.id,
-                    category: convertToSlug(product.category_id?.name),
+                    category: convertToSlug(product?.category?.name),
                     slug: convertToSlug(product?.name)
                 }
             }"
@@ -28,8 +28,8 @@
                 name: 'product-detail',
                 params: {
                     id: product.id,
-                    category: convertToSlug(product.category_id.name),
-                    slug: convertToSlug(product.name)
+                    category: convertToSlug(product.category?.name),
+                    slug: convertToSlug(product?.name)
                 }
             }"
             class="cursor-pointer hover:underline"

@@ -1,14 +1,14 @@
 <template>
     <div class="">
         <div
-            v-if="categories?.data?.product?.length"
+            v-if="categories?.data?.products?.length"
             class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 relative"
         >
-            <div class="col-span-1" v-for="(item, index) in categories?.data.product" :key="index">
+            <div class="col-span-1" v-for="(item, index) in categories?.data.products" :key="index">
                 <CardProduct
                     :product="{
                         ...item,
-                        category_id: {
+                        category: {
                             id: route.params.id as string,
                             name: categories?.data.name
                         }
@@ -28,7 +28,7 @@
                         name: item.name,
                         description: item.description,
                         statusPending: item.statusPending || false,
-                        category_id: {
+                        category: {
                             id: route.params.id as string,
                             name: item.name
                         },
@@ -86,8 +86,8 @@ async function fetchCategoriesById(): Promise<{ data: Category; totalCount: numb
 }
 
 const productsPending = computed(() => {
-    if (status.value === 'pending' && categories.value?.data?.product.length) {
-        const lengthArray = limit.value - categories.value?.data?.product.length;
+    if (status.value === 'pending' && categories.value?.data?.products.length) {
+        const lengthArray = limit.value - categories.value?.data?.products.length;
         return Array.from(
             { length: lengthArray },
             (_, index) =>
