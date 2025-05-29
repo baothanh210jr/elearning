@@ -86,7 +86,7 @@ async function fetchCategoriesById(): Promise<{ data: Category; totalCount: numb
 }
 
 const productsPending = computed(() => {
-    if (status.value === 'pending' && categories.value?.data?.products.length) {
+    if (status.value === 'pending' && categories.value?.data?.products?.length) {
         const lengthArray = limit.value - categories.value?.data?.products.length;
         return Array.from(
             { length: lengthArray },
