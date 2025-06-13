@@ -1,5 +1,5 @@
 <template>
-    <UCard class="min-h-80 max-h-100 flex flex-col shadow-md hover:bg-white">
+    <UCard class="min-h-80 flex flex-col shadow-md hover:bg-white">
         <!-- Hình ảnh mô tả (thumbnail) -->
 
         <USkeleton v-if="product.statusPending" class="h-40 w-full my-5" />
@@ -14,7 +14,7 @@
                 }
             }"
         >
-            <div class="aspect-1/1 cursor-pointer overflow-hidden rounded-lg my-5">
+            <div class="aspect-4/3 w-full max-h-50 cursor-pointer overflow-hidden rounded-lg mb-5">
                 <img
                     :src="`${config.public.apiBase}/assets/${product.thumbnail}`"
                     alt="Article thumbnail"
@@ -34,7 +34,7 @@
             }"
             class="cursor-pointer hover:underline"
         >
-            <span v-if="!product.statusPending" class="text-lg font-semibold line-clamp-2">{{
+            <span v-if="!product.statusPending" class="text-lg line-clamp-2">{{
                 product.name
             }}</span>
             <USkeleton v-else class="h-10 w-full" />
@@ -63,6 +63,13 @@
                 </div>
             </div>
         </div>
+        <UButton
+            loading-auto
+            icon="i-material-symbols:add-shopping-cart"
+            class="w-full flex justify-center py-4 text-white text-xl mt-10 cursor-pointer"
+        >
+            Thêm vào giỏ hàng
+        </UButton>
     </UCard>
 </template>
 

@@ -1,7 +1,5 @@
 import { css } from './configs';
-import type { NuxtPage } from '@nuxt/schema';
-import { createResolver } from '@nuxt/kit';
-import { PAGE } from './constants/CommonConstant';
+import { routes } from './routes';
 export default defineNuxtConfig({
     compatibilityDate: '2025-03-20',
 
@@ -21,23 +19,7 @@ export default defineNuxtConfig({
     },
     hooks: {
         'pages:extend'(pages) {
-            pages.push(
-                {
-                    name: PAGE.HOME,
-                    path: '/',
-                    file: '@/pages/index.vue'
-                },
-                {
-                    name: PAGE.PRODUCT_DETAIL,
-                    path: '/hai-san/:category/:slug/:id',
-                    file: '@/pages/product-detail.vue'
-                },
-                {
-                    name: PAGE.CATEGORIES,
-                    path: '/hai-san/:category/:id',
-                    file: '@/pages/categories.vue'
-                }
-            );
+            pages.push(...routes);
         }
     }
 });

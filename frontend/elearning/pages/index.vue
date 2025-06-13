@@ -1,24 +1,48 @@
 <template>
-    <div class="">
-        <div
-            v-if="products?.data?.length"
-            class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 relative"
-        >
-            <div class="col-span-1" v-for="(item, index) in products?.data" :key="index">
-                <CardProduct :product="item" />
-            </div>
-            <div class="absolute bottom-50 right-0 sentinel" ref="sentinel"></div>
-            <div
-                v-if="status === API_STATUS_SSR.PENDING"
-                class="col-span-1"
-                v-for="(item, index) in productsPending"
-                :key="index"
+    <div class="space-y-10">
+        <!-- Category -->
+        <div v-for="(category, index) in items" :key="index" class="space-y-3">
+            <NuxtLink
+                :to="{
+                    name: PAGE.CATEGORIES,
+                    params: {
+                        category: convertToSlug(category.name),
+                        id: category.id
+                    }
+                }"
+                class="text-2xl font-medium block"
             >
-                <!-- <CardCourse :course="item" /> -->
+                {{ category?.name }}
+            </NuxtLink>
+            <!-- Products -->
+            <div
+                v-if="category?.products?.length"
+                class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 relative"
+            >
+                <div class="col-span-1" v-for="(product, index) in category?.products" :key="index">
+                    <CardProduct
+                        :product="{
+                            ...product,
+                            category: {
+                                id: category.id,
+                                name: category.name
+                            }
+                        }"
+                    />
+                </div>
+                <!-- <div class="absolute bottom-50 right-0 sentinel" ref="sentinel"></div>
+                <div
+                    v-if="status === API_STATUS_SSR.PENDING"
+                    class="col-span-1"
+                    v-for="(item, index) in productsPending"
+                    :key="index"
+                >
+                    <CardProduct :product="item" />
+                </div> -->
             </div>
-        </div>
-        <div v-else class="flex justify-center items-center h-screen">
-            <p>No product available</p>
+            <div v-else class="flex justify-center items-center">
+                <p>Sản phẩm đang được cập nhật</p>
+            </div>
         </div>
     </div>
 </template>
@@ -28,6 +52,7 @@ import { ref } from 'vue';
 import type { Product } from '@/types/product';
 import { PAGE } from '@/constants/CommonConstant';
 import { API_STATUS_SSR } from '@/constants/ApiConstant';
+import { useCategoriesStore } from '@/stores/Categories';
 
 definePageMeta({
     name: PAGE.HOME
@@ -39,6 +64,7 @@ const totalCount = ref(0);
 const authStore = useAuthentication();
 const applicationStore = useApplicationStore();
 const sentinel = ref<HTMLDivElement | null>(null);
+const { items } = useCategoriesStore();
 
 const productsPending = computed(() => {
     if (status.value === 'pending' && products.value?.data.length) {

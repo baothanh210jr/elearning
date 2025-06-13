@@ -3,8 +3,8 @@
         <nav class="text-black">
             <!-- Menu chính -->
             <ul class="flex justify-center items-center gap-4">
-                <li v-for="(menu, index) in categories?.data" :key="index">
-                    <!-- <pre>{{ categories?.data }}</pre> -->
+                <li v-for="(menu, index) in items" :key="index">
+                    <!-- <pre>{{ items?.data }}</pre> -->
                     <NuxtLink
                         :to="{
                             name: PAGE.CATEGORIES,
@@ -26,24 +26,6 @@
 
 <script setup lang="ts">
 import { PAGE } from '@/constants/CommonConstant';
-import type { Category } from '@/types/category';
-
-const fetchCategories = async (): Promise<{ data: Category[]; totalCount: number }> => {
-    const response = await $fetch<{ data: Category[]; totalCount: number }>(`/api/categories`, {
-        method: 'GET',
-        query: {
-            meta: 'total_count'
-        }
-    });
-    return response;
-};
-
-const {
-    data: categories,
-    status,
-    error,
-    refresh
-} = useAsyncData<{ data: Category[]; totalCount: number }>('fetchCategories', () =>
-    fetchCategories()
-);
+import { useCategoriesStore } from '@/stores/Categories';
+const { items } = useCategoriesStore();
 </script>

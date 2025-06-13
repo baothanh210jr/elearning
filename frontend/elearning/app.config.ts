@@ -4,7 +4,7 @@ export default defineAppConfig({
             slots: {
                 root: 'rounded-[calc(var(--ui-radius)*2)]',
                 header: 'p-4 sm:px-6 !border-none',
-                body: 'py-0 sm:py-0 !border-none flex-1',
+                body: 'p-4 sm:p-4 h-full',
                 footer: 'p-4 sm:px-6 !border-none mt-auto'
             }
         },
